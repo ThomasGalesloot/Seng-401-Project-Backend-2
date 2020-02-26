@@ -1,3 +1,5 @@
+from flask import Flask, request, render_template
+
 from Database import Database
 
 
@@ -24,6 +26,21 @@ class Login:
             self.confirm_found = "true"
 
 
-test = Login("SimpleNoodleMan", "1234Password")
-test.compare()
-print(test.confirm_found)
+app = Flask(__name__)
+
+
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
+
+
+@app.route('/', methods=['POST'])
+def getvalue():
+    Username = request.form['uname']
+    Password = request.form['psw']
+    Test = Login(Username,Password)
+
+
+if __name__ == "__main__":
+    app.run()
+
