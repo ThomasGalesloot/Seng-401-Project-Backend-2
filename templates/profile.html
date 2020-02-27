@@ -84,6 +84,13 @@ span.psw {
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
+    {% with messages = get_flashed_messages()%}
+      {% if messages %}
+          {% for message in messages %}
+            <h3>{{ message }}</h3>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
   </div>
 
   <div class="container" style="background-color:#f1f1f1">
