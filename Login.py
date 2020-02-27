@@ -43,6 +43,8 @@ def getvalue():
     print(Test.confirm_found)
     if Test.confirm_found == "true":
         return render_template("Welcom.html")
+    else:
+        return render_template("NoGood.html")
 
 
 if __name__ == "__main__":
