@@ -38,9 +38,12 @@ def profile():
 def getvalue():
     Username = request.form['uname']
     Password = request.form['psw']
-    Test = Login(Username,Password)
+    Test = Login(Username, Password)
+    Test.compare()
+    print(Test.confirm_found)
+    if Test.confirm_found == "true":
+        return render_template("Welcom.html")
 
 
 if __name__ == "__main__":
     app.run()
-
