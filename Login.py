@@ -34,6 +34,7 @@ def profile():
     return render_template("profile.html")
 
 
+
 @app.route('/', methods=['POST'])
 def getvalue():
     Username = request.form['uname']
