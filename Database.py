@@ -9,3 +9,4 @@ class Database:
                                    'Database=Project;'
                                    'Trusted_Connection=yes;')
         self.cursor = self.conn.cursor()
+        self.cnxn = self.conn.cnxn()
