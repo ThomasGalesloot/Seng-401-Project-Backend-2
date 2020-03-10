@@ -5,13 +5,12 @@ from PostData import PostData
 class Post:
     db = Database()
 
-   #inserts a brand new post into the db
+   # inserts a brand new post into the db
     def insertPost(self):
         # retrieve some value here to fill PostData
         # placeholder for now below, remove once uneeded
-        pD = PostData(1, "Title", "Owner", "Type", "Description", "Steps", "Ingredients", 3)
+        pD = PostData("Title", "Owner", "Type", "Description", "Steps", "Ingredients", 3)
         self.db.cursor.execute("INSERT INTO [dbo].[post_info] ("
-            "[Id]"
             ",[Title]"
             ",[Owner]"
             ",[Type]"

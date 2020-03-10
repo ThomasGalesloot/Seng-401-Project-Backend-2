@@ -1,5 +1,4 @@
 class PostData:
-    id = 0
     title = ""
     owner = ""
     type = ""
@@ -8,8 +7,7 @@ class PostData:
     ingredients = ""
     prep_Time = 0
 
-    def __init__(self, i, t, own, typ, d, step, ingr, prep):
-        self.id = i
+    def __init__(self, t, own, typ, d, step, ingr, prep):
         self.title = t
         self.owner = own
         self.type = typ
