@@ -46,6 +46,3 @@ class CommentsService():
     def hideComment(self, postID):
         self.isHidden = True
 
-
-
-
