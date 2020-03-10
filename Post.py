@@ -38,7 +38,7 @@ class Post:
         for row in allPosts:
             retrievedPosts.append(PostData(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
 
-    #retrieves a single post allowing it to be posted
+    # retrieves a single post allowing it to be posted
     def retrieveSinglePostPage(self):
         # We should probably create a different data store type that has the ability to only grab title and owner and
         # return a full PostData object
