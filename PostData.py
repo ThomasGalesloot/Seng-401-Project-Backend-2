@@ -15,3 +15,4 @@ class PostData:
         self.steps = step
         self.ingredients = ingr
         self.prep_Time = prep
+

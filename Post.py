@@ -4,7 +4,8 @@ from PostData import PostData
 
 class Post:
     db = Database()
-
+    pD = PostData()
+    retrievedPosts = []
    # inserts a brand new post into the db
     def insertPost(self):
         # retrieve some value here to fill PostData
@@ -33,9 +34,9 @@ class Post:
     def retrieveBrowsingPosts(self):
         self.db.cursor.execute('select Title, Owner, Type from Users.dbo.login_info')
         allPosts = self.db.cursor.fetchall()
-        retrievedPosts = []
+        self.retrievedPosts = []
         for row in allPosts:
-            retrievedPosts.append(PostData(row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+            self.retrievedPosts.append(PostData(row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
 
     # retrieves a single post allowing it to be posted
     def retrieveSinglePostPage(self):
