@@ -5,8 +5,7 @@ class Database:
 
     def __init__(self):
         self.conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=LAPTOP-GCB1I1ES;'
-                                   'Database=Project;'
+                                   'Server=LAPTOP-7OES2EOP;'
+                                   'Database=Users;'
                                    'Trusted_Connection=yes;')
         self.cursor = self.conn.cursor()
-        self.cnxn = self.conn.cnxn()

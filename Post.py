@@ -4,13 +4,13 @@ from PostData import PostData
 
 class Post:
     db = Database()
-    pD = PostData()
+    pD = PostData("Title", "Owner", "Type", "Description", "Steps", "Ingredients", 3)
     retrievedPosts = []
    # inserts a brand new post into the db
     def insertPost(self):
         # retrieve some value here to fill PostData
         # placeholder for now below, remove once uneeded
-        pD = PostData("Title", "Owner", "Type", "Description", "Steps", "Ingredients", 3)
+        self.pD = PostData("Title", "Owner", "Type", "Description", "Steps", "Ingredients", 3)
         self.db.cursor.execute("INSERT INTO [dbo].[post_info] ("
             ",[Title]"
             ",[Owner]"
@@ -32,10 +32,10 @@ class Post:
 
     # retrieves posts for browsing on the DB on the db
     def retrieveBrowsingPosts(self):
-        self.db.cursor.execute('select Title, Owner, Type from Users.dbo.login_info')
-        allPosts = self.db.cursor.fetchall()
+        self.db.cursor.execute('select * from posts_info')
         self.retrievedPosts = []
-        for row in allPosts:
+        i = 0
+        for row in self.db.cursor.fetchall():
             self.retrievedPosts.append(PostData(row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
 
     # retrieves a single post allowing it to be posted
@@ -47,4 +47,4 @@ class Post:
         allPosts = self.db.cursor.fetchall()
         retrievedPosts = []
         for row in allPosts:
-            retrievedPosts.append(PostData(row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+            self.retrievedPosts.append(PostData(row[1], row[2], row[3], row[4], row[5], row[6], row[7]))

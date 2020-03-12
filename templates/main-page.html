@@ -26,14 +26,14 @@ body {
 /* Left column */
 .leftcolumn {   
   float: left;
-  width: 75%;
+  width: 70%;
 }
 
 /* Right column */
 .rightcolumn {
   float: left;
   width: 25%;
-  padding-left: 20px;
+<!--  padding-left: 20px;-->
 }
 
 /* Fake image */
@@ -156,22 +156,22 @@ body {
   <h2>Bread.it</h2>
 </div>
 
-<div class="row">
+
+{%for i in range(0, len)%}
+       <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <a href="#"><h2>POST 1</h2></a>
-      <h5>User, Date</h5>
+      <a href="#"><h2> {{recipes[i].title}}</h2></a>
+      <h5>{{recipes[i].owner}}, {{recipes[i].type}}</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
+      <p>{{recipes[i].description}}</p>
     </div>
-    <div class="card">
-      <a href="#"><h2>POST 2</h2></a>
-      <h5>User, Date</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-    </div>
-  </div>
-  <div class="rightcolumn">
+      </div>
+       </div>
+{%endfor%}
+
+
+  <div class="leftcolumn">
     <div class="card">
       <h2>Looking to Contribute?</h2>
       <div class=open-btn>
@@ -201,8 +201,8 @@ body {
                     <option value="dessert">Dessert</option>
                     <option value="baking">Baking</option>
                     <option value="budget">Budget</option>
-                  </select>                  
-                </label>
+                  </select>
+                </div>
 
                 <p></p>
 
@@ -218,7 +218,7 @@ body {
 
                 <label for="ing"><strong>Ingredients:</strong></label>
                 <textarea type="ing" id="ing" placeholder="What do we need? (max. 300 characters)" name="ing" maxlength="300" rows="4" cols = "50" required></textarea>
-              
+
                 <p></p>
 
                 <label for="time"><strong>Time it Takes (in minutes):</strong></label>
@@ -234,7 +234,7 @@ body {
             function openPost() {
               document.getElementById("newPostPopup").style.display="block";
             }
-            
+
             function closePost() {
               document.getElementById("newPostPopup").style.display= "none";
             }
@@ -253,7 +253,7 @@ body {
             $(".remove").click(function() {
                 $(this).parent().remove();
             });
-            
+
           </script>
     </div>
     <div class="card">
@@ -263,9 +263,6 @@ body {
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
 
 
 
