@@ -269,7 +269,7 @@ body {
             </form>
         </div>
         <div class="post-popup" id="newComment">
-        <form target="_blank">
+        <form action = "" method = "post" target="_blank">
             <div id="newCommentPopup">
                 <div class="post-popup" id="commentForm">
                 <h2>New Comment</h2>
@@ -277,45 +277,23 @@ body {
                 <label for="Title">
                 <strong>Title:</strong>
                 </label>
-                <input type="text" id="name" placeholder="Your Title (max. 50 characters)" name="name" required maxlength="50" size="50">
+                <input type="text" id="name" placeholder="Your Title (max. 50 characters)" name="title" required maxlength="50" size="50">
 
                 <p></p>
 
-                <label for="type"><strong>Type:</strong></label>
-                  <select id="type" name="type">
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                    <option value="snack">Snack</option>
-                    <option value="dessert">Dessert</option>
-                    <option value="baking">Baking</option>
-                    <option value="budget">Budget</option>
-                  </select>
+
                 </div>
 
-                <p></p>
 
-                <label for="des"><strong>Description:</strong></label>
-                <textarea type="des" id="des" placeholder="A short description (max. 50 characters)" name="des" maxlength="50" cols="30"></textarea>
 
                 <p></p>
 
-                <label for="steps"><strong>Steps:</strong></label>
-                <textarea type="steps" id="setps" placeholder="How do we make it? (max. 300 characters)" name="steps" maxlength="300" rows="4" cols = "50" required></textarea>
+                <label for="content"><strong>Content: </strong></label>
+                <textarea type="content" id="content" placeholder="Comment content here (max. 300 characters)" name="content" maxlength="300" rows="4" cols = "50" required></textarea>
 
                 <p></p>
 
-                <label for="ing"><strong>Ingredients:</strong></label>
-                <textarea type="ing" id="ing" placeholder="What do we need? (max. 300 characters)" name="ing" maxlength="300" rows="4" cols = "50" required></textarea>
-
-                <p></p>
-
-                <label for="time"><strong>Time it Takes (in minutes):</strong></label>
-                <input type="text" id="time" name="time" maxlength="4" size="4">
-
-                <p></p>
-
-                <button class="add">Submit</button>
+                <input type = "submit">
                 <button type="button" class="btn cancel" onclick="closeComment()">Close</button>
             </div>
             </form>
@@ -347,6 +325,11 @@ body {
 
             function openComment() {
               document.getElementById("newCommentPopup").style.display="block";
+            }
+
+            function submitFunction(){
+                var xhttp = new XMLHttpRequest();
+
             }
 
             function closeComment() {
