@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, flash
+
+from Comments import Comments
 from Login import Login
 from Post import Post
 from Database import Database
@@ -29,6 +31,15 @@ def getvalue():
     else:
         flash('Invalid Credentials, please try again')
         return render_template("profile.html")
+
+
+@app.route('/comment', methods=['POST'])
+def postComment():
+    title = request.form['title']
+    content = request.form['content']
+    Test = Comments(title, content)
+    Test.addComment()
+    return render_template("main-page.html")
 
 
 if __name__ == "__main__":
