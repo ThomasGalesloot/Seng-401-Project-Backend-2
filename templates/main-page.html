@@ -26,14 +26,14 @@ body {
 /* Left column */
 .leftcolumn {   
   float: left;
-  width: 75%;
+  width: 70%;
 }
 
 /* Right column */
 .rightcolumn {
   float: left;
   width: 25%;
-  padding-left: 20px;
+<!--  padding-left: 20px;-->
 }
 
 /* Fake image */
@@ -72,37 +72,6 @@ body {
     padding: 0;
   }
 }
-
-#newCommentPopup {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      justify-content: center;
-      z-index: 1; /* Sit on top */
-      text-align: center; /* Location of the box*/
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-      color: white;
-      }
-      /* Fix the button on the left side of the page */
-      .open-btn {
-      display: flex;
-      justify-content: left;
-      }
-      /* Style and fix the button on the page */
-      .open-button {
-      background-color: #1c87c9;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      opacity: 0.8;
-      }
 
 #newPostPopup {
       display: none; /* Hidden by default */
@@ -187,28 +156,27 @@ body {
   <h2>Bread.it</h2>
 </div>
 
-<div class="row">
+
+{%for i in range(0, len)%}
+       <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <a href="#"><h2>POST 1</h2></a>
-      <h5>User, Date</h5>
+      <a href="#"><h2> {{recipes[i].title}}</h2></a>
+      <h5>{{recipes[i].owner}}, {{recipes[i].type}}</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-        <button class="comment-button" type="button" onclick="openComment()">
-        <strong>New Comment</strong>
-        </button>
+      <p>{{recipes[i].description}}</p>
+
+
+        <!--put comment button here-->
+
+
     </div>
-    <div class="card">
-      <a href="#"><h2>POST 2</h2></a>
-      <h5>User, Date</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-        <button class="comment-button" type="button" onclick="openComment()">
-        <strong>New Comment</strong>
-        </button>
-    </div>
-  </div>
-  <div class="rightcolumn">
+      </div>
+       </div>
+{%endfor%}
+
+
+  <div class="leftcolumn">
     <div class="card">
       <h2>Looking to Contribute?</h2>
       <div class=open-btn>
@@ -238,7 +206,7 @@ body {
                     <option value="dessert">Dessert</option>
                     <option value="baking">Baking</option>
                     <option value="budget">Budget</option>
-                  </select>                  
+                  </select>
                 </div>
 
                 <p></p>
@@ -255,7 +223,7 @@ body {
 
                 <label for="ing"><strong>Ingredients:</strong></label>
                 <textarea type="ing" id="ing" placeholder="What do we need? (max. 300 characters)" name="ing" maxlength="300" rows="4" cols = "50" required></textarea>
-              
+
                 <p></p>
 
                 <label for="time"><strong>Time it Takes (in minutes):</strong></label>
@@ -265,45 +233,13 @@ body {
 
                 <button class="add">Submit</button>
                 <button type="button" class="btn cancel" onclick="closePost()">Close</button>
-            </div>
             </form>
         </div>
-        <div class="comment-Popup" id="newComment">
-        <form action = "/comment" method = "post" target="_blank" name="comment">
-            <div id="newCommentPopup">
-                <div class="comment-Popup" id="commentForm">
-                <h2>New Comment</h2>
-
-                <label for="Title">
-                <strong>Title:</strong>
-                </label>
-                <input type="text" id="name" placeholder="Your Title (max. 50 characters)" name="title" required maxlength="50" size="50">
-
-                <p></p>
-
-
-                </div>
-
-
-
-                <p></p>
-
-                <label for="content"><strong>Content: </strong></label>
-                <textarea type="content" id="content" placeholder="Comment content here (max. 300 characters)" name="content" maxlength="300" rows="4" cols = "50" required></textarea>
-
-                <p></p>
-            <button>Submit</button>
-<!--                <input type = "submit">-->
-                <button type="button" class="btn cancel" onclick="closeComment()">Close</button>
-            </div>
-            </form>
-        </div>
-
         <script>
             function openPost() {
               document.getElementById("newPostPopup").style.display="block";
             }
-            
+
             function closePost() {
               document.getElementById("newPostPopup").style.display= "none";
             }
@@ -323,34 +259,6 @@ body {
                 $(this).parent().remove();
             });
 
-            function openComment() {
-              document.getElementById("newCommentPopup").style.display="block";
-            }
-
-            function submitFunction(){
-                var xhttp = new XMLHttpRequest();
-
-            }
-
-            function closeComment() {
-              document.getElementById("newCommentPopup").style.display= "none";
-            }
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-              var modal = document.getElementById('newCommentPopup');
-              if (event.target == modal) {
-                closeForm();
-              }
-            }
-            $(".add").click(function() {
-                $("form > p:first-child").clone(true).insertBefore("form > p:last-child");
-                return false;
-            });
-
-            $(".remove").click(function() {
-                $(this).parent().remove();
-            });
-            
           </script>
     </div>
     <div class="card">
@@ -360,9 +268,6 @@ body {
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
 
 
 

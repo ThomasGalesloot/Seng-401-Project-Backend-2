@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash
 
 from Comments import Comments
 from Login import Login
+from Post import Post
 from Database import Database
 
 app = Flask(__name__)
@@ -21,7 +22,12 @@ def getvalue():
     Test.compare()
     print(Test.confirm_found)
     if Test.confirm_found == "true":
-        return render_template("main-page.html")
+        pst = Post()
+        pst.retrieveBrowsingPosts()
+        recipes = pst.retrievedPosts
+        print(len(recipes))
+
+        return render_template("main-page.html", len=len(recipes), recipes=recipes)
     else:
         flash('Invalid Credentials, please try again')
         return render_template("profile.html")
@@ -37,4 +43,4 @@ def postComment():
 
 
 if __name__ == "__main__":
-    app.run(threaded=True)
+    app.run()
