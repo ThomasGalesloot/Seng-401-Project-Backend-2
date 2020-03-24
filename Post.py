@@ -43,7 +43,7 @@ class Post:
         # We should probably create a different data store type that has the ability to only grab title and owner and
         # return a full PostData object
         pD = PostData("Title", "Owner", "Type", "Description", "Steps", "Ingredients", 3)
-        self.db.cursor.execute('select * from Users.dbo.login_info where Title =' + pD.title + 'and Owner = ' + pD.owner )
+        self.db.cursor.execute('select * from Project.dbo.login_info where Title =' + pD.title + 'and Owner = ' + pD.owner )
         allPosts = self.db.cursor.fetchall()
         retrievedPosts = []
         for row in allPosts:

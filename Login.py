@@ -15,7 +15,7 @@ class Login:
         self.password = pa
 
     def compare(self):
-        rowcount = self.db.cursor.execute('select * from Users.dbo.login_info WHERE username =? AND password = ?',
+        rowcount = self.db.cursor.execute('select * from Project.dbo.login_info WHERE username =? AND password = ?',
                                           (self.username, self.password))
 
         rows = rowcount.fetchone()
