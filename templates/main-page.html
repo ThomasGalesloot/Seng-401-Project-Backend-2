@@ -167,7 +167,36 @@ body {
       <p>{{recipes[i].description}}</p>
 
 
-        <!--put comment button here-->
+        <div class="comment-Popup" id="newComment">
+        <form action = "/comment" method = "post" target="_blank" name="comment">
+            <div id="newCommentPopup">
+                <div class="comment-Popup" id="commentForm">
+                <h2>New Comment</h2>
+
+                <label for="Title">
+                <strong>Title:</strong>
+                </label>
+                <input type="text" id="name" placeholder="Your Title (max. 50 characters)" name="title" required maxlength="50" size="50">
+
+                <p></p>
+
+
+                </div>
+
+
+
+                <p></p>
+
+                <label for="content"><strong>Content: </strong></label>
+                <textarea type="content" id="content" placeholder="Comment content here (max. 300 characters)" name="content" maxlength="300" rows="4" cols = "50" required></textarea>
+
+                <p></p>
+            <button>Submit</button>
+<!--                <input type = "submit">-->
+                <button type="button" class="btn cancel" onclick="closeComment()">Close</button>
+            </div>
+            </form>
+        </div>
 
 
     </div>
@@ -258,6 +287,16 @@ body {
             $(".remove").click(function() {
                 $(this).parent().remove();
             });
+
+
+            function openComment() {
+              document.getElementById("newCommentPopup").style.display="block";
+            }
+
+
+            function closeComment() {
+              document.getElementById("newCommentPopup").style.display= "none";
+            }
 
           </script>
     </div>
