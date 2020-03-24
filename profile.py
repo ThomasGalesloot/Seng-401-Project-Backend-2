@@ -39,7 +39,12 @@ def postComment():
     content = request.form['content']
     Test = Comments(title, content)
     Test.addComment()
-    return render_template("main-page.html")
+    pst = Post()
+    pst.retrieveBrowsingPosts()
+    recipes = pst.retrievedPosts
+    print(len(recipes))
+
+    return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
 
 if __name__ == "__main__":
