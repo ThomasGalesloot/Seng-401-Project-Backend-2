@@ -21,19 +21,20 @@ def getvalue():
     Test.compare()
     print(Test.confirm_found)
     if Test.confirm_found == "true":
-        return render_template("Welcom.html")
+        return render_template("main-page.html")
     else:
         flash('Invalid Credentials, please try again')
         return render_template("profile.html")
 
 
-@app.route('/postComment', methods=['GET', 'POST'])
+@app.route('/comment', methods=['POST'])
 def postComment():
     title = request.form['title']
     content = request.form['content']
     Test = Comments(title, content)
     Test.addComment()
-    return render_template("profile.html")
+    return render_template("main-page.html")
+
 
 if __name__ == "__main__":
-    app.run()
+    app.run(threaded=True)

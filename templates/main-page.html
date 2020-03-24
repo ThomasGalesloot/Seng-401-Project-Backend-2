@@ -268,10 +268,10 @@ body {
             </div>
             </form>
         </div>
-        <div class="post-popup" id="newComment">
-        <form action = "" method = "post" target="_blank">
+        <div class="comment-Popup" id="newComment">
+        <form action = "/comment" method = "post" target="_blank" name="comment">
             <div id="newCommentPopup">
-                <div class="post-popup" id="commentForm">
+                <div class="comment-Popup" id="commentForm">
                 <h2>New Comment</h2>
 
                 <label for="Title">
@@ -292,8 +292,8 @@ body {
                 <textarea type="content" id="content" placeholder="Comment content here (max. 300 characters)" name="content" maxlength="300" rows="4" cols = "50" required></textarea>
 
                 <p></p>
-
-                <input type = "submit">p
+            <button>Submit</button>
+<!--                <input type = "submit">-->
                 <button type="button" class="btn cancel" onclick="closeComment()">Close</button>
             </div>
             </form>
