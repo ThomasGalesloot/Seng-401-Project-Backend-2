@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, flash
 from Comments import Comments
 from Login import Login
 from Post import Post
+from PostData import PostData
 from Database import Database
 
 app = Flask(__name__)
@@ -39,6 +40,25 @@ def postComment():
     content = request.form['content']
     Test = Comments(title, content)
     Test.addComment()
+    pst = Post()
+    pst.retrieveBrowsingPosts()
+    recipes = pst.retrievedPosts
+    print(len(recipes))
+
+    return render_template("main-page.html", len=len(recipes), recipes=recipes)
+
+
+@app.route('/post', methods=['POST'])
+def postPost():
+    name = request.form['name']
+    type = request.form['type']
+    des = request.form['des']
+    steps = request.form['steps']
+    ing = request.form['ing']
+    time = request.form['time']
+    owner = "me"
+    post = PostData(name, owner, type, des, steps, ing, time)
+    print(" " + name + " " + type + " " + des + " " + steps + " " + ing + " " + time)
     pst = Post()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
