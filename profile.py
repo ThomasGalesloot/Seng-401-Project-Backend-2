@@ -9,6 +9,8 @@ from Database import Database
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+x = "hi"
+
 
 @app.route("/profile")
 def profile():
@@ -21,6 +23,8 @@ def getvalue():
     Password = request.form['psw']
     Test = Login(Username, Password)
     Test.compare()
+    global x
+    x = Username
     print(Test.confirm_found)
     if Test.confirm_found == "true":
         pst = Post()
@@ -57,9 +61,12 @@ def postPost():
     ing = request.form['ing']
     time = request.form['time']
     owner = "me"
-    post = PostData(name, owner, type, des, steps, ing, time)
-    print(" " + name + " " + type + " " + des + " " + steps + " " + ing + " " + time)
+    post = PostData(name, x, type, des, steps, ing, time)
+    # print(" " + name + " " + x + " " + type + " " + des + " " + steps + " " + ing + " " + time)
+
     pst = Post()
+    pst.pD = post
+    pst.insertPost()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
     print(len(recipes))

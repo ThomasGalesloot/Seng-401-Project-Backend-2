@@ -20,14 +20,13 @@ class Post:
             ",[Ingredients]"
             ",[Prep_Time])"
             "VALUES"
-            "(<Id," + pD.id + ",>"
-            ",<Title," + pD.title + ",>"
-            ",<Owner," + pD.owner + ",>"
-            ",<Type," + pD.type + ",>"
-            ",<Description," + pD.description + ",>"
-            ",<Steps," + pD.steps + ",>"
-            ",<Ingredients," + pD.ingredients + ",>"
-           ",<Prep_Time," + pD.prep_Time + ",>)")
+            ",<Title," + self.pD.title + ",>"
+            ",<Owner," + self.pD.owner + ",>"
+            ",<Type," + self.pD.type + ",>"
+            ",<Description," + self.pD.description + ",>"
+            ",<Steps," + self.pD.steps + ",>"
+            ",<Ingredients," + self.pD.ingredients + ",>"
+           ",<Prep_Time," + str(self.pD.prep_Time) + ",>)")
         self.db.commit()
 
     # retrieves posts for browsing on the DB on the db
