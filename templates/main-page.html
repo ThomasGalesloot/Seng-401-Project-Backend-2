@@ -26,14 +26,14 @@ body {
 /* Left column */
 .leftcolumn {   
   float: left;
-  width: 75%;
+  width: 70%;
 }
 
 /* Right column */
 .rightcolumn {
   float: left;
   width: 25%;
-  padding-left: 20px;
+<!--  padding-left: 20px;-->
 }
 
 /* Fake image */
@@ -73,7 +73,7 @@ body {
   }
 }
 
-#newCommentPopup {
+#newPostPopup {
       display: none; /* Hidden by default */
       position: fixed; /* Stay in place */
       justify-content: center;
@@ -103,8 +103,53 @@ body {
       cursor: pointer;
       opacity: 0.8;
       }
+      /* Hide the Popup form */
+      .form-popup {
+      border: 2px solid #666;
+      z-index: 9;
+      max-width: 300px;
+      margin: 0 auto;
+      }
+      /* Styles for the form container */
+      .form-container {
+      max-width: 300px;
+      padding: 20px;
+      background-color: #fff;
+      }
+      /* Full-width for input fields */
+      .form-container input[type=text], .form-container input[type=password] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #eee;
+      }
+      /* When the inputs get focus, do something */
+      .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+      }
+      /* Style submit/login button */
+      .form-container .btn {
+      background-color: #8ebf42;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom:10px;
+      opacity: 0.8;
+      }
+      /* Style cancel button */
+      .form-container .cancel {
+      background-color: #cc0000;
+      }
+      /* Hover effects for buttons */
+      .form-container .btn:hover, .open-button:hover {
+      opacity: 1;
+      }
 
-#newPostPopup {
+#newCommentPopup {
       display: none; /* Hidden by default */
       position: fixed; /* Stay in place */
       justify-content: center;
@@ -187,91 +232,26 @@ body {
   <h2>Bread.it</h2>
 </div>
 
-<div class="row">
+
+{%for i in range(0, len)%}
+       <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <a href="#"><h2>POST 1</h2></a>
-      <h5>User, Date</h5>
+      <a href="#"><h2> {{recipes[i].title}}</h2></a>
+      <h5>{{recipes[i].owner}}, {{recipes[i].type}}</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-        <button class="comment-button" type="button" onclick="openComment()">
+      <p>{{recipes[i].description}}</p>
+
+
+<div class=open-btn>
+        <button class="open-comment" type="button" onclick="openComment()">
         <strong>New Comment</strong>
         </button>
     </div>
-    <div class="card">
-      <a href="#"><h2>POST 2</h2></a>
-      <h5>User, Date</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-        <button class="comment-button" type="button" onclick="openComment()">
-        <strong>New Comment</strong>
-        </button>
-    </div>
-  </div>
-  <div class="rightcolumn">
-    <div class="card">
-      <h2>Looking to Contribute?</h2>
-      <div class=open-btn>
-      <button class="open-button" type="button" onclick="openPost()">
-        <strong>New Post</strong>
-        </button>
-    </div>
-        <div class="post-popup" id="newPost">
-        <form target="_blank">
-            <div id="newPostPopup">
-                <div class="post-popup" id="postForm">
-                <h2>New Post</h2>
-
-                <label for="Title">
-                <strong>Title:</strong>
-                </label>
-                <input type="text" id="name" placeholder="Your Title (max. 50 characters)" name="name" required maxlength="50" size="50">
-
-                <p></p>
-
-                <label for="type"><strong>Type:</strong></label>
-                  <select id="type" name="type">
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                    <option value="snack">Snack</option>
-                    <option value="dessert">Dessert</option>
-                    <option value="baking">Baking</option>
-                    <option value="budget">Budget</option>
-                  </select>                  
-                </div>
-
-                <p></p>
-
-                <label for="des"><strong>Description:</strong></label>
-                <textarea type="des" id="des" placeholder="A short description (max. 50 characters)" name="des" maxlength="50" cols="30"></textarea>
-
-                <p></p>
-
-                <label for="steps"><strong>Steps:</strong></label>
-                <textarea type="steps" id="setps" placeholder="How do we make it? (max. 300 characters)" name="steps" maxlength="300" rows="4" cols = "50" required></textarea>
-
-                <p></p>
-
-                <label for="ing"><strong>Ingredients:</strong></label>
-                <textarea type="ing" id="ing" placeholder="What do we need? (max. 300 characters)" name="ing" maxlength="300" rows="4" cols = "50" required></textarea>
-              
-                <p></p>
-
-                <label for="time"><strong>Time it Takes (in minutes):</strong></label>
-                <input type="text" id="time" name="time" maxlength="4" size="4">
-
-                <p></p>
-
-                <button class="add">Submit</button>
-                <button type="button" class="btn cancel" onclick="closePost()">Close</button>
-            </div>
-            </form>
-        </div>
-        <div class="post-popup" id="newComment">
-        <form action = "" method = "post" target="_blank">
+        <div class="comment-Popup" id="newComment">
+        <form action = "/comment" method = "post" target="_blank" name="comment">
             <div id="newCommentPopup">
-                <div class="post-popup" id="commentForm">
+                <div class="comment-Popup" id="commentForm">
                 <h2>New Comment</h2>
 
                 <label for="Title">
@@ -292,18 +272,85 @@ body {
                 <textarea type="content" id="content" placeholder="Comment content here (max. 300 characters)" name="content" maxlength="300" rows="4" cols = "50" required></textarea>
 
                 <p></p>
-
-                <input type = "submit">p
+            <button>Submit</button>
+<!--                <input type = "submit">-->
                 <button type="button" class="btn cancel" onclick="closeComment()">Close</button>
             </div>
             </form>
         </div>
 
+
+    </div>
+      </div>
+       </div>
+{%endfor%}
+
+
+  <div class="leftcolumn">
+    <div class="card">
+      <h2>Looking to Contribute?</h2>
+      <div class=open-btn>
+      <button class="open-button" type="button" onclick="openPost()">
+        <strong>New Post</strong>
+        </button>
+    </div>
+        <div class="post-popup" id="newPost">
+
+            <form action = "/post" method = "post" target="_blank" name="post">
+            <div id="newPostPopup">
+                <div class="post-popup" id="postForm">
+                <h2>New Post</h2>
+
+                <label for="Title">
+                <strong>Title:</strong>
+                </label>
+                <input type="text" id="name" placeholder="Your Title (max. 50 characters)" name="name" required maxlength="50" size="50">
+
+                <p></p>
+
+                <label for="type"><strong>Type:</strong></label>
+                  <select id="type" name="type">
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                    <option value="snack">Snack</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="baking">Baking</option>
+                    <option value="budget">Budget</option>
+                  </select>
+                </div>
+
+                <p></p>
+
+                <label for="des"><strong>Description:</strong></label>
+                <textarea type="des" id="des" placeholder="A short description (max. 50 characters)" name="des" maxlength="50" cols="30"></textarea>
+
+                <p></p>
+
+                <label for="steps"><strong>Steps:</strong></label>
+                <textarea type="steps" id="setps" placeholder="How do we make it? (max. 300 characters)" name="steps" maxlength="300" rows="4" cols = "50" required></textarea>
+
+                <p></p>
+
+                <label for="ing"><strong>Ingredients:</strong></label>
+                <textarea type="ing" id="ing" placeholder="What do we need? (max. 300 characters)" name="ing" maxlength="300" rows="4" cols = "50" required></textarea>
+
+                <p></p>
+
+                <label for="time"><strong>Time it Takes (in minutes):</strong></label>
+                <input type="text" id="time" name="time" maxlength="4" size="4">
+
+                <p></p>
+
+                <button class="add">Submit</button>
+                <button type="button" class="btn cancel" onclick="closePost()">Close</button>
+            </form>
+        </div>
         <script>
             function openPost() {
               document.getElementById("newPostPopup").style.display="block";
             }
-            
+
             function closePost() {
               document.getElementById("newPostPopup").style.display= "none";
             }
@@ -323,34 +370,16 @@ body {
                 $(this).parent().remove();
             });
 
+
             function openComment() {
               document.getElementById("newCommentPopup").style.display="block";
             }
 
-            function submitFunction(){
-                var xhttp = new XMLHttpRequest();
-
-            }
 
             function closeComment() {
               document.getElementById("newCommentPopup").style.display= "none";
             }
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-              var modal = document.getElementById('newCommentPopup');
-              if (event.target == modal) {
-                closeForm();
-              }
-            }
-            $(".add").click(function() {
-                $("form > p:first-child").clone(true).insertBefore("form > p:last-child");
-                return false;
-            });
 
-            $(".remove").click(function() {
-                $(this).parent().remove();
-            });
-            
           </script>
     </div>
     <div class="card">
@@ -360,9 +389,6 @@ body {
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
 
 
 

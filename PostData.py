@@ -5,7 +5,7 @@ class PostData:
     description = ""
     steps = ""
     ingredients = ""
-    prep_Time = 0
+    prep_Time = ""
 
     def __init__(self, t, own, typ, d, step, ingr, prep):
         self.title = t
