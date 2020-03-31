@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        font-family: Arial;
+        padding: 20px;
+        background: #f1f1f1;
+    }
+    .header {
+        padding: 30px;
+        font-size: 40px;
+        text-align: center;
+        background: white;
+    }
+    .fakeimg {
+        background-color: #aaa;
+        width: 97.3%;
+        padding: 20px;
+    }
+    .leftcolumn {   
+        float: left;
+        width: 50%;
+    }
+    .rightcolumn {
+        float: left;
+        width: 50%;
+    }
+    .card {
+        background-color: white;
+        padding: 20px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+    <div class="header">
+        <h2>*Post Title*</h2>
+        <h6>A *Meal Type* Recipe By: *User*</h6>
+    </div>
+
+    <div class="card">
+        <div class="fakeimg" style="height: 400px;">*Image*</div>
+    </div>
+    <div class="leftcolumn">
+        <div class="card">
+            <h2>Description</h2>
+            <p>This is a example description using 50 characters!</p>
+            <h4>Time it will take: *minutes*</h4>
+        </div>
+        
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2>What you will need:</h2>
+            <p>Here we will throw in all the ingredients that you will need in order to cook/bake/make 
+                whatever the recipe is asking for!
+                I will now fill up the text with ham to reach 300 characters:
+                hamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamham
+                hamhamhamhamhamhamhamhamhamhamhamham
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 style="text-align: center;">How to make it:</h2>
+        <p style="text-align: center;">Here you just throw in the steps that you will need in order to cook/bake/make whatever 
+            the recipe is asking for! 
+            I will now fill up the text with ham to reach 300 characters: 
+            hamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamham
+        </p>
+    </div>
+
+ 
+    <div class="card">
+        <h2>Comments:</h2>
+    <div class="card">
+        <h4>*Comment Title*</h4>
+        <p>*Comment content* 
+            *keep looping*
+        </p>
+    </div>
+    <div class="card">
+        <h4>*Comment Title*</h4>
+        <p>*Comment content* 
+            *keep looping*
+        </p>
+    </div>
+    <div class="card">
+        <h4>*Comment Title*</h4>
+        <p>*Comment content* 
+            *keep looping*
+        </p>
+    </div>
+    </div>
+
+    <div class="card">
+    <form action = "/comment" method = "post" target="_blank" name="comment">
+        <div id="newCommentPopup">
+            <div class="comment-Popup" id="commentForm">
+            <h2>Share your thoughts:</h2>
+
+            <label for="Title">
+            <strong>Title:</strong>
+            </label>
+            <input type="text" id="name" placeholder="Your Title (max. 50 characters)" name="title" required maxlength="50" size="50">
+
+            <p></p>
+
+
+            </div>
+
+
+
+            <p></p>
+
+            <label for="content"><strong>Content: </strong></label>
+            <textarea type="content" id="content" placeholder="Comment content here (max. 300 characters)" name="content" maxlength="300" rows="4" cols = "50" required></textarea>
+
+            <p></p>
+            <button>Submit</button>
+        </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

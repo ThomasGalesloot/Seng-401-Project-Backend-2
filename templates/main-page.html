@@ -237,9 +237,10 @@ body {
        <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <a href="#"><h2> {{recipes[i].title}}</h2></a>
+      <a href="{{ url_for('viewPost') }}" onclick="this.closest('form').submit();return false;"><h2> {{recipes[i].title}}</h2></a>
       <h5>{{recipes[i].owner}}, {{recipes[i].type}}</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
+        <input id="postId" name="postId" type="hidden" value= {{recipes[i].id}}>
       <p>{{recipes[i].description}}</p>
 
 
@@ -371,6 +372,8 @@ body {
             });
 
 
+
+
             function openComment() {
               document.getElementById("newCommentPopup").style.display="block";
             }
@@ -383,8 +386,13 @@ body {
           </script>
     </div>
     <div class="card">
-      <h3>About us</h3>
-      <p>Some text..</p>
+      <h3>Looking for something?</h3>
+      <p></p>
+        <form action = "/search" method = "post" target="_blank" name="search">
+        <input type="text" id="search" placeholder="Search here" required maxlength="50" size="50">
+        <button type="submit">Go</button>
+        </form>
+
     </div>
   </div>
 </div>
