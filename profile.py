@@ -76,6 +76,7 @@ def postPost():
 
 @app.route('/viewPost', methods=['GET', 'POST'])
 def viewPost():
+    print("Hello")
     id = request.form["postId"]
     print(id)
     pst = Post()
