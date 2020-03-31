@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, flash
 
-from Comments import Comments
+from Comment import Comment
+from CommentData import CommentData
 from Login import Login
 from Post import Post
 from PostData import PostData
-from Database import Database
+from PostDatabase import Database
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -38,8 +39,9 @@ def getvalue():
 def postComment():
     title = request.form['title']
     content = request.form['content']
-    Test = Comments(title, content)
-    Test.addComment()
+    author = "me"
+    comment = Comment(title, content, author, 0, 0)  # TODO figure out how to find parentID
+    comment.addComment()
     pst = Post()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
