@@ -12,24 +12,24 @@ class Comment:
 
     def __init__(self, tit, cont, auth, votes, parentPostID):
         self.title = tit
-        self.text = cont
+        self.commentText = cont
         self.author = auth
         self.votes = 0
         self.parentPostID = 0
 
     def addComment(self):
         print(
-            "Title: " + self.title + "\nContent: " + self.text + "\nAuthor: " + self.author)
+            "Title: " + self.title + "\nContent: " + self.commentText + "\nAuthor: " + self.author)
 
         db = CommentsDatabase()
-        cd = CommentData("title", "commentText", "author", "votes", "parentPostID")
+        #  cd = CommentData("title", "commentText", "author", "votes", "parentPostID")
         retrievedComments = []
         self.insertComment()
 
     # inserts a brand new comment into the db
     def insertComment(self):
 
-        self.cd = CommentData("title", "testText", "testing", "votes", "parentPostID")
+        # self.cd = CommentData("title", "commentText", "testing", "votes", "parentPostID")
         self.db.cursor.execute("INSERT INTO [dbo].[Comments] ("
                                    "[postID]"
                                    ",[userID]"

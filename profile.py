@@ -42,6 +42,8 @@ def postComment():
     author = "me"
     comment = Comment(title, content, author, 0, 0)  # TODO figure out how to find parentID
     comment.addComment()
+
+    # needed for when the page refreshes?
     pst = Post()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
