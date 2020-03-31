@@ -9,7 +9,7 @@ class Post:
     # inserts a brand new post into the db
     def insertPost(self):
         # retrieve some value here to fill PostData
-        # placeholder for now below, remove once uneeded
+        # placeholder for now below, remove once unneeded
         self.db.cursor.execute("INSERT INTO [dbo].[posts_info]"
                                "([Title]"
                                ",[Owner]"
@@ -35,7 +35,7 @@ class Post:
         self.retrievedPosts = []
         i = 0
         for row in self.db.cursor.fetchall():
-            self.retrievedPosts.append(PostData(row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+            self.retrievedPosts.append(PostData(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
 
     # retrieves a single post allowing it to be posted
     def retrieveSinglePostPage(self):

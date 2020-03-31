@@ -237,9 +237,10 @@ body {
        <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <a href="#"><h2> {{recipes[i].title}}</h2></a>
+      <a href="{{ url_for('viewPost') }}" onclick="this.closest('form').submit();return false;"><h2> {{recipes[i].title}}</h2></a>
       <h5>{{recipes[i].owner}}, {{recipes[i].type}}</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
+        <input id="postId" name="postId" type="hidden" value= {{recipes[i].id}}>
       <p>{{recipes[i].description}}</p>
 
 
@@ -369,6 +370,8 @@ body {
             $(".remove").click(function() {
                 $(this).parent().remove();
             });
+
+
 
 
             function openComment() {

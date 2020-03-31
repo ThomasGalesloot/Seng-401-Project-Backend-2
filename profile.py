@@ -74,5 +74,16 @@ def postPost():
     return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
 
+@app.route('/viewPost', methods=['GET', 'POST'])
+def viewPost():
+    id = request.form["postId"]
+    print(id)
+    pst = Post()
+    pst.retrieveBrowsingPosts()
+    recipes = pst.retrievedPosts
+
+    return render_template("main-page.html", len=len(recipes), recipes=recipes)
+
+
 if __name__ == "__main__":
     app.run()
