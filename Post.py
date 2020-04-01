@@ -35,7 +35,15 @@ class Post:
         self.retrievedPosts = []
         i = 0
         for row in self.db.cursor.fetchall():
-            self.retrievedPosts.append(PostData(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+            self.retrievedPosts.append(PostData(row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[0]))
+
+    def retrieveSinglePosts(self, Postid):
+        self.db.cursor.execute('select * from posts_info')
+        self.retrievedPosts = []
+        i = 0
+        for row in self.db.cursor.fetchall():
+            if row[0] == Postid:
+                self.retrievedPosts.append(PostData(row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[0]))
 
     # retrieves a single post allowing it to be posted
     def retrieveSinglePostPage(self):

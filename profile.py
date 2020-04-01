@@ -6,11 +6,14 @@ from Login import Login
 from Post import Post
 from PostData import PostData
 from PostDatabase import Database
+from flask import jsonify
+
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 x = "hi"
+ID = 0
 
 
 @app.route("/profile")
@@ -65,8 +68,8 @@ def postPost():
     ing = request.form['ing']
     time = request.form['time']
     owner = "me"
-    post = PostData(name, x, type, des, steps, ing, time)
-    # print(" " + name + " " + x + " " + type + " " + des + " " + steps + " " + ing + " " + time)
+    post = PostData(name, x, type, des, steps, ing, time, 0)
+    print(" " + name + " " + x + " " + type + " " + des + " " + steps + " " + ing + " " + time)
 
     pst = Post()
     pst.pD = post
@@ -78,15 +81,26 @@ def postPost():
     return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
 
+@app.route('/view', methods=['POST'])
+def view():
+    postid = request.get_json()
+    # print(postid)
+    global ID
+    ID = postid
+    # return render_template("viewPost.html")
+    resp = jsonify(success=True)
+    return resp
+
+
 @app.route('/viewPost', methods=['GET', 'POST'])
 def viewPost():
-    id = request.form["postId"]
-    print(id)
+    print(ID)
     pst = Post()
-    pst.retrieveBrowsingPosts()
+    pst.retrieveSinglePosts(ID)
     recipes = pst.retrievedPosts
+    print(recipes[0].title)
 
-    return render_template("main-page.html", len=len(recipes), recipes=recipes)
+    return render_template("viewPost.html", len=len(recipes), recipes=recipes)
 
 
 if __name__ == "__main__":
