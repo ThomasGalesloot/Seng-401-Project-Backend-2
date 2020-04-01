@@ -237,12 +237,10 @@ body {
        <div class="row">
   <div class="leftcolumn">
     <div class="card">
-<!--        onclick="this.closest('form').submit();return false;"-->
-     <a href="/viewPost" onclick="viewPost(this)" ><h2> {{recipes[i].title}}</h2></a>
+     <a href="#" onclick="viewPost({{recipes[i].id}})" ><h2> {{recipes[i].title}}</h2></a>
       <h5>{{recipes[i].owner}}, {{recipes[i].type}}</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
-
-        <input id="postId" name="postId" type="hidden" value= {{recipes[i].id}}>
+        <input id= "postId" name="postId" type="hidden" value= {{recipes[i].id}}>
       <p>{{recipes[i].description}}</p>
 
 
@@ -349,12 +347,23 @@ body {
                 <button type="button" class="btn cancel" onclick="closePost()">Close</button>
             </form>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
-        function viewPost(element)
+        function viewPost(arg)
         {
-            var id = e$('.postId').val();
 
+            $.ajax({
+                type: "POST",
+                url: "/viewPost",
+                data: JSON.stringify(arg),
+                contentType: "application/json",
+                success: function(result) {
+                    console.log(result);
+                }
+
+            });
         }
+
             function openPost() {
               document.getElementById("newPostPopup").style.display="block";
             }

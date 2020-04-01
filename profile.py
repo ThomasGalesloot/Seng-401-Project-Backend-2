@@ -4,6 +4,7 @@ from Comments import Comments
 from Login import Login
 from Post import Post
 from PostData import PostData
+from flask import jsonify
 from Database import Database
 
 app = Flask(__name__)
@@ -74,16 +75,13 @@ def postPost():
     return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
 
-@app.route('/viewPost', methods=['GET', 'POST'])
+@app.route('/viewPost', methods=['POST'])
 def viewPost():
     print("Hello")
-    id = request.form["postId"]
-    print(id)
-    pst = Post()
-    pst.retrieveBrowsingPosts()
-    recipes = pst.retrievedPosts
-
-    return render_template("main-page.html", len=len(recipes), recipes=recipes)
+    postid = request.get_json()
+    print(postid)
+    resp = jsonify(success=True)
+    return resp
 
 
 if __name__ == "__main__":
