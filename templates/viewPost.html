@@ -35,8 +35,8 @@
 </head>
 <body>
     <div class="header">
-        <h2>*Post Title*</h2>
-        <h6>A *Meal Type* Recipe By: *User*</h6>
+        <h2>{{recipes[0].title}}</h2>
+        <h6>A *{{recipes[0].type}}* Recipe By: {{recipes[0].owner}}</h6>
     </div>
 
     <div class="card">
@@ -45,30 +45,21 @@
     <div class="leftcolumn">
         <div class="card">
             <h2>Description</h2>
-            <p>This is a example description using 50 characters!</p>
-            <h4>Time it will take: *minutes*</h4>
+            <p>{{recipes[0].description}}</p>
+            <h4>Time it will take: {{recipes[0].prep_Time}} minutes</h4>
         </div>
         
     </div>
     <div class="rightcolumn">
         <div class="card">
             <h2>What you will need:</h2>
-            <p>Here we will throw in all the ingredients that you will need in order to cook/bake/make 
-                whatever the recipe is asking for!
-                I will now fill up the text with ham to reach 300 characters:
-                hamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamham
-                hamhamhamhamhamhamhamhamhamhamhamham
-            </p>
+            <p> {{recipes[0].ingredients}} </p>
         </div>
     </div>
 
     <div class="card">
         <h2 style="text-align: center;">How to make it:</h2>
-        <p style="text-align: center;">Here you just throw in the steps that you will need in order to cook/bake/make whatever 
-            the recipe is asking for! 
-            I will now fill up the text with ham to reach 300 characters: 
-            hamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamham
-        </p>
+        <p style="text-align: center;"> {{recipes[0].steps}}</p>
     </div>
 
  
