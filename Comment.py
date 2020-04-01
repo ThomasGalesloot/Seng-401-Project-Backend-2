@@ -17,7 +17,7 @@ class Comment:
         self.commentText = cont
         self.author = auth
         self.votes = 0
-        self.parentPostID = 0
+        self.parentPostID = parentPostID
 
     def addComment(self):
         print(
@@ -42,13 +42,14 @@ class Comment:
                                ", '" + self.author +
                                "', " + str(0) +
                                ", '" + self.commentText + "')")
+        print(str(self.parentPostID) + "\n\n\n")
 
         self.db.conn.commit()
-        self.searchComment(0)
+        self.searchComment(self.parentPostID)
 
     def searchComment(self, toSearch):
         self.db.cursor.execute(
-            'select * from [dbo].[Comments] where postID =' + str(0))  #TODO replace 0 with toSearch when done testing
+            'select * from [dbo].[Comments] where postID =' + str(toSearch))  #TODO replace 0 with toSearch when done testing
         for row in self.db.cursor.fetchall():
             self.retrievedComments.append(
                 CommentData("title", row[0], row[1], row[2], row[3], row[4]))  # TODO add title to db and implement

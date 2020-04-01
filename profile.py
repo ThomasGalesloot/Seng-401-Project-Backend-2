@@ -47,7 +47,7 @@ def postComment():
     title = request.form['title']
     content = request.form['content']
     author = x
-    comment = Comment(title, content, author, 0, 0)  # TODO figure out how to find parentID
+    comment = Comment(title, content, author, 0, ID)  # TODO figure out how to find parentID
     comment.addComment()
 
     # needed for when the page refreshes?
