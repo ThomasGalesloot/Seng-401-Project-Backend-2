@@ -1,5 +1,6 @@
 from CommentData import CommentData
 from CommentsDatabase import CommentsDatabase
+import json
 
 
 class Comment:
@@ -55,4 +56,6 @@ class Comment:
             print(i.title + "," + i.commentText + "," +
                   i.author + "," + str(i.votes) + "," +
                   str(i.parentPostID) + "\n")  # May need to put votes and ids in str()
+        # Now put into a JSON
+
 
