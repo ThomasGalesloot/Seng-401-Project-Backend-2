@@ -237,7 +237,7 @@ body {
        <div class="row">
   <div class="leftcolumn">
     <div class="card">
-     <a href="#" onclick="viewPost({{recipes[i].id}})" ><h2> {{recipes[i].title}}</h2></a>
+     <a href="{{ url_for('viewPost') }}" onclick="viewPost({{recipes[i].id}})" ><h2> {{recipes[i].title}}</h2></a>
       <h5>{{recipes[i].owner}}, {{recipes[i].type}}</h5>
       <div class="fakeimg" style="height:200px;">Image</div>
         <input id= "postId" name="postId" type="hidden" value= {{recipes[i].id}}>
@@ -354,11 +354,12 @@ body {
 
             $.ajax({
                 type: "POST",
-                url: "/viewPost",
+                url: "/view",
                 data: JSON.stringify(arg),
                 contentType: "application/json",
                 success: function(result) {
                     console.log(result);
+
                 }
 
             });

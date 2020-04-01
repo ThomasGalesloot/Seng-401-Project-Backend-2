@@ -75,13 +75,18 @@ def postPost():
     return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
 
-@app.route('/viewPost', methods=['POST'])
-def viewPost():
-    print("Hello")
+@app.route('/view', methods=['POST'])
+def view():
     postid = request.get_json()
     print(postid)
+    # return render_template("viewPost.html")
     resp = jsonify(success=True)
     return resp
+
+
+@app.route('/viewPost', methods=['GET', 'POST'])
+def viewPost():
+    return render_template("viewPost.html")
 
 
 if __name__ == "__main__":
