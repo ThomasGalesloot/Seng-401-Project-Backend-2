@@ -41,8 +41,18 @@ def getvalue():
         flash('Invalid Credentials, please try again')
         return render_template("profile.html")
 
-
 @app.route('/comment', methods=['POST'])
+def comment():
+    postid = request.get_json()
+    print(postid)
+    print("\n\n\n\nHello\n\n\n\n")
+    global ID
+    ID = postid
+    # return render_template("viewPost.html")
+    resp = jsonify(success=True)
+    return resp
+
+@app.route('/commentPost', methods=['POST'])
 def postComment():
     title = request.form['title']
     content = request.form['content']
@@ -56,7 +66,7 @@ def postComment():
     recipes = pst.retrievedPosts
     print(len(recipes))
 
-    return render_template("main-page.html", len=len(recipes), recipes=recipes)
+    return render_template("viewPost.html", len=len(recipes), recipes=recipes)
 
 
 @app.route('/post', methods=['POST'])

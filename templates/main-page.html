@@ -244,13 +244,9 @@ body {
       <p>{{recipes[i].description}}</p>
 
 
-<div class=open-btn>
-        <button class="open-comment" type="button" onclick="openComment()">
-        <strong>New Comment</strong>
-        </button>
-    </div>
+
         <div class="comment-Popup" id="newComment">
-        <form action = "/comment" method = "post" target="_blank" name="comment">
+        <form action = "/commentPost" method = "post" target="_blank" name="comment">
             <div id="newCommentPopup">
                 <div class="comment-Popup" id="commentForm">
                 <h2>New Comment</h2>
@@ -364,6 +360,8 @@ body {
 
             });
         }
+
+
 
             function openPost() {
               document.getElementById("newPostPopup").style.display="block";
