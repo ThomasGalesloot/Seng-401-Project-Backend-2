@@ -8,6 +8,7 @@ from Post import Post
 from PostData import PostData
 from PostDatabase import Database
 from flask import jsonify
+import requests
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -123,7 +124,7 @@ def viewPost():
     print(recipes[0].title)
     #try:
     print("Before request")
-    req = request.get_json("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
+    req = requests.get("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
     print("After request")
     # except request.exceptions.ConnectionError:
      #    return "Service unavailable"
