@@ -51,7 +51,7 @@ def postComment():
     recipes = pst.retrievedPosts
     print(len(recipes))
 
-    return render_template("main-page.html", len=len(recipes), recipes=recipes)
+    return render_template("viewPost.html", len=len(recipes), recipes=recipes)
 
 
 @app.route('/post', methods=['POST'])
@@ -96,6 +96,16 @@ def viewPost():
     print(recipes[0].title)
 
     return render_template("viewPost.html", len=len(recipes), recipes=recipes)
+
+
+@app.route('/mainPage', methods=['POST'])
+def mainPage():
+    pst = Post()
+    pst.retrieveBrowsingPosts()
+    recipes = pst.retrievedPosts
+    print(len(recipes))
+
+    return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
 
 if __name__ == "__main__":
