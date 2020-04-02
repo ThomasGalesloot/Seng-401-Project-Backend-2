@@ -5,6 +5,7 @@ from Login import Login
 from Post import Post
 from PostData import PostData
 from flask import jsonify
+from Search import Search
 from Database import Database
 
 app = Flask(__name__)
@@ -103,6 +104,18 @@ def mainPage():
     pst = Post()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
+    print(len(recipes))
+
+    return render_template("main-page.html", len=len(recipes), recipes=recipes)
+
+
+@app.route('/search', methods=['POST'])
+def search():
+    search = request.form['inSearch']
+    print(search)
+    ser = Search()
+    ser.searchPostsByTitle(search)
+    recipes = ser.retrievedPost
     print(len(recipes))
 
     return render_template("main-page.html", len=len(recipes), recipes=recipes)
