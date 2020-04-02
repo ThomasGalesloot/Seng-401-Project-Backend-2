@@ -36,12 +36,14 @@ class Comment:
                                "[postID]"
                                ",[userID]"
                                ",[votes]"
-                               ",[cmtText])"
+                               ",[cmtText]"
+                               ",[cmtTitle])"
                                "VALUES"
                                "( " + str(self.parentPostID) +  # TODO make this get the post ID from the event table
                                ", '" + self.author +
                                "', " + str(0) +
-                               ", '" + self.commentText + "')")
+                               ", '" + self.commentText +
+                               "', '" + self.title + "')")
         print(str(self.parentPostID) + "\n\n\n")
 
         self.db.conn.commit()
@@ -49,14 +51,18 @@ class Comment:
 
     def searchComment(self, toSearch):
         self.db.cursor.execute(
-            'select * from [dbo].[Comments] where postID =' + str(toSearch))  #TODO replace 0 with toSearch when done testing
+            'select * from [dbo].[Comments] where postID =' + str(toSearch))
         for row in self.db.cursor.fetchall():
             self.retrievedComments.append(
-                CommentData("title", row[0], row[1], row[2], row[3], row[4]))  # TODO add title to db and implement
+                CommentData(row[5], row[0], row[1], row[2], row[3], row[4]))
+        #for i in self.retrievedComments:
+            #print(i.title + "," + i.commentText + "," +
+            #      i.author + "," + str(i.votes) + "," +
+            #      str(i.parentPostID) + "\n")
+            # Now put into a JSON
         for i in self.retrievedComments:
-            print(i.title + "," + i.commentText + "," +
-                  i.author + "," + str(i.votes) + "," +
-                  str(i.parentPostID) + "\n")  # May need to put votes and ids in str()
-        # Now put into a JSON
+            jsonStr = json.dumps(i.__dict__)
+            print(jsonStr + "\n")
+            # TODO send to main app
 
 
