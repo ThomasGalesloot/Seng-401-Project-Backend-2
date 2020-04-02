@@ -131,10 +131,27 @@ def viewPost():
     print("After request")
     # except request.exceptions.ConnectionError:
     #    return "Service unavailable"
-    print(req.json())
+    print(req.text)
+    res = req.text
+    length = res.split(" ", 2)
+    leng = int(length[1])
+    titles = res.split("((Title))", leng)
+    Comments = res.split("((Comment))", leng)
+    print(titles)
+    print(Comments)
+    t = []
+    c = []
+    titles.pop(0)
+    for x in range(0, leng):
+        magic = titles[x].split(" ")
+        t.append(magic[1])
+        c.append(magic[3])
 
+    print(t)
+    # c[leng-1].replace('"', '')
+    print(c)
 
-    return render_template("viewPost.html", len=len(recipes), recipes=recipes)
+    return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
 
 
 if __name__ == "__main__":

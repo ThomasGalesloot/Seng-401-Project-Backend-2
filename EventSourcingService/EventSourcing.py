@@ -11,7 +11,6 @@ from Comment import Comment
 from flask import jsonify
 from flask import Response
 
-
 app = Flask(__name__)
 # app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SECRET_KEY'] = 'df^(*($#jfdkglI'
@@ -26,17 +25,17 @@ def updatecmtdb(self):
     cdb = CommentsDatabase()
     for i in commentsToAdd:
         cdb.cursor.execute("INSERT INTO [dbo].[Comments] ("
-                               "[postID]"
-                               ",[userID]"
-                               ",[votes]"
-                               ",[cmtText]"
-                               ",[cmtTitle])"
-                               "VALUES"
-                               "( " + str(i.parentPostID) +
-                               ", '" + i.author +
-                               "', " + str(0) +
-                               ", '" + i.commentText +
-                               "', '" + i.title + "')")
+                           "[postID]"
+                           ",[userID]"
+                           ",[votes]"
+                           ",[cmtText]"
+                           ",[cmtTitle])"
+                           "VALUES"
+                           "( " + str(i.parentPostID) +
+                           ", '" + i.author +
+                           "', " + str(0) +
+                           ", '" + i.commentText +
+                           "', '" + i.title + "')")
     self.lastChecked = Event.getnewid(Event(0, 0))
     return jsonify(success=True)
 
@@ -44,10 +43,20 @@ def updatecmtdb(self):
 @app.route('/fetchCmts/<postid>')
 def getCmts(postid):
     test = Comment()
+    test.retrievedComments.clear()
     test.searchComment(postid)
     print("test")
-    return Response(json.dumps(test.__dict__), mimetype='application/json')
-    # return jsonify(test.retrievedComments)
+    bigString = ""
+    # temp = test.retrievedComments
+    for x in range(0, len(test.retrievedComments)):
+        bigString += " ((Title)) " + test.retrievedComments[x].title
+        bigString += " ((Comment)) " + test.retrievedComments[x].commentText
+
+    # return Response(json.dumps(test), mimetype='application/json')
+    bigString2 = " " + str(len(test.retrievedComments)) + bigString + " "
+    return jsonify(bigString2)
+
+
 # http://127.0.0.1:5001/fetchCmts/{}
 
 if __name__ == "__main__":
