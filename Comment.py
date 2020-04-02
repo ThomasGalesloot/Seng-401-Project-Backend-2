@@ -55,14 +55,6 @@ class Comment:
         for row in self.db.cursor.fetchall():
             self.retrievedComments.append(
                 CommentData(row[5], row[0], row[1], row[2], row[3], row[4]))
-        #for i in self.retrievedComments:
-            #print(i.title + "," + i.commentText + "," +
-            #      i.author + "," + str(i.votes) + "," +
-            #      str(i.parentPostID) + "\n")
-            # Now put into a JSON
-        for i in self.retrievedComments:
-            jsonStr = json.dumps(i.__dict__)
-            print(jsonStr + "\n")
-            # TODO send to main app
+
 
 
