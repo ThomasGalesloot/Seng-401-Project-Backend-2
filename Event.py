@@ -1,4 +1,6 @@
 from datetime import datetime
+from time import strftime
+
 from EventsDatabase import EventsDatabase
 from CommentData import CommentData
 
@@ -18,8 +20,9 @@ class Event:
 
     def __init__(self, pID, auth, cmtTitle, cmtText):
         # YYYY - MM - DD hh: mm:ss[.fractional seconds]
-        self.timeOccurred = datetime(2013, 10, 31, 18, 23, 29, 227)
-        self.dateString = self.timeOccured.strftime("%d/%m/%Y %H:%M:%S")
+        self.timeOccurred = datetime.now()
+        self.dateString = self.timeOccurred.strftime("%Y - %m - %d %H:%M:%S")
+        print(self.dateString)
         # self.commentID = cID
         self.postID = pID
         self.commentText = cmtText
@@ -29,7 +32,7 @@ class Event:
 
     def addEvent(self):
         print(
-            "Title: " + self.title + "\nContent: " + self.commentText + "\nAuthor: " + self.author + + "\nPID: " + self.postID + "\nTimestamp: " + self.dateString)
+            "Title: " + self.commentTitle + "\nContent: " + self.commentText + "\nAuthor: " + self.author + "\nPID: " + str(self.postID) + "\nTimestamp: " + self.dateString)
 
         db = EventsDatabase()
         #  cd = CommentData("title", "commentText", "author", "votes", "parentPostID")
@@ -47,15 +50,14 @@ class Event:
                                ",[time]"
                                ",[cmtTitle])"
                                "VALUES"
-                               "( " + str(self.parentPostID) +
+                               "( " + str(self.postID) +
                                ", '" + self.author +
                                "', '" + self.commentText +
                                "', '" + self.dateString +
                                "', '" + self.commentTitle + "')")
-        print(str(self.parentPostID) + "\n\n\n")
+        # print(str(self.parentPostID) + "\n\n\n")
 
         self.db.conn.commit()
-        self.searchComment(self.parentPostID)
 
     def getnewevents(self, lastid):
         self.db.cursor.execute(
