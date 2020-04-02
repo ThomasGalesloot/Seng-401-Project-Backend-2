@@ -64,7 +64,7 @@ def postComment():
     comment = Comment()
     commentData = CommentData(title, content, author, 0, ID)
     comment.commentData = commentData
-    comment.insertComment() # TODO Maybe remove
+    comment.insertComment()  # TODO Maybe remove
 
     # -------------------------------------
     # anything in here is for eventdb, outside is old stuff, just so we can remove this for functionality
@@ -123,13 +123,16 @@ def viewPost():
     pst.retrieveSinglePosts(ID)
     recipes = pst.retrievedPosts
     print(recipes[0].title)
-    #try:
+    # try:
     print("Before request")
+
     req = requests.get("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
+    # req.json()
     print("After request")
     # except request.exceptions.ConnectionError:
-     #    return "Service unavailable"
-    print(req.text)
+    #    return "Service unavailable"
+    print(req.json())
+
 
     return render_template("viewPost.html", len=len(recipes), recipes=recipes)
 
