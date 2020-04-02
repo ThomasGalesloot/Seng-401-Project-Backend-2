@@ -121,6 +121,11 @@ def viewPost():
     pst.retrieveSinglePosts(ID)
     recipes = pst.retrievedPosts
     print(recipes[0].title)
+    try:
+        req = request.get("http://127.0.0.1:5001/fetchCmts{}".format(ID))
+    except request.exceptions.ConnectionError:
+        return "Service unavailable"
+    print(req)
 
     return render_template("viewPost.html", len=len(recipes), recipes=recipes)
 

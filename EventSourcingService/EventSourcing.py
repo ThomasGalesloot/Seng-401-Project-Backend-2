@@ -40,7 +40,9 @@ def updatecmtdb(self):
 
 @app.route('/fetchCmts/<postid>')
 def getCmts(postid):
-    return Comment.searchComment(Comment(0, 0, 0, 0, 0), postid)
+    test = Comment()
+    test.searchComment(postid)
+    return jsonify(test.retrievedComments)
 
 
 if __name__ == "__main__":
