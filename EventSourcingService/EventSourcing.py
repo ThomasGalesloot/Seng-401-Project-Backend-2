@@ -42,8 +42,9 @@ def updatecmtdb(self):
 def getCmts(postid):
     test = Comment()
     test.searchComment(postid)
+    print("etst")
     return jsonify(test.retrievedComments)
-
+# http://127.0.0.1:5001/fetchCmts/{}
 
 if __name__ == "__main__":
     app.run(port=5001)
