@@ -61,9 +61,10 @@ def postComment():
     content = request.form['content']
     author = x
 
-
-    comment = Comment(title, content, author, 0, ID)  # TODO figure out how to find parentID
-    comment.addComment()
+    comment = Comment()
+    commentData = CommentData(title, content, author, 0, ID)
+    comment.commentData = commentData
+    comment.insertComment() # TODO Maybe remove
 
     # -------------------------------------
     # anything in here is for eventdb, outside is old stuff, just so we can remove this for functionality
@@ -128,7 +129,7 @@ def viewPost():
     print("After request")
     # except request.exceptions.ConnectionError:
      #    return "Service unavailable"
-    print(req)
+    print(req.text)
 
     return render_template("viewPost.html", len=len(recipes), recipes=recipes)
 

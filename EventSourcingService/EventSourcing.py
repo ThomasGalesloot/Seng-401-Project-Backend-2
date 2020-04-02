@@ -1,3 +1,5 @@
+import json
+
 from EventSourcingService.EventDatabase import EDatabase
 from Event import Event
 from CommentsDatabase import CommentsDatabase
@@ -7,6 +9,7 @@ from flask import Flask, render_template, request, flash
 
 from Comment import Comment
 from flask import jsonify
+from flask import Response
 
 
 app = Flask(__name__)
@@ -42,8 +45,9 @@ def updatecmtdb(self):
 def getCmts(postid):
     test = Comment()
     test.searchComment(postid)
-    print("etst")
-    return jsonify(test.retrievedComments)
+    print("test")
+    return Response(json.dumps(test.__dict__), mimetype='application/json')
+    # return jsonify(test.retrievedComments)
 # http://127.0.0.1:5001/fetchCmts/{}
 
 if __name__ == "__main__":

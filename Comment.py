@@ -5,28 +5,12 @@ import json
 
 class Comment:
     db = CommentsDatabase()
-    title = ""
-    commentText = ""
-    author = ""
-    votes = ""
-    parentPostID = ""
     retrievedComments = []
+    commentData = ""
 
-    def __init__(self, tit, cont, auth, votes, parentPostID):
-        self.title = tit
-        self.commentText = cont
-        self.author = auth
-        self.votes = 0
-        self.parentPostID = parentPostID
 
-    def addComment(self):
-        print(
-            "Title: " + self.title + "\nContent: " + self.commentText + "\nAuthor: " + self.author)
 
-        db = CommentsDatabase()
-        #  cd = CommentData("title", "commentText", "author", "votes", "parentPostID")
-        # retrievedComments = []
-        self.insertComment()
+
 
     # inserts a brand new comment into the db
     def insertComment(self):
@@ -39,11 +23,11 @@ class Comment:
                                ",[cmtText]"
                                ",[cmtTitle])"
                                "VALUES"
-                               "( " + str(self.parentPostID) +  # TODO make this get the post ID from the event table
-                               ", '" + self.author +
+                               "( " + str(self.commentData.parentPostID) +  # TODO make this get the post ID from the event table
+                               ", '" + self.commentData.author +
                                "', " + str(0) +
-                               ", '" + self.commentText +
-                               "', '" + self.title + "')")
+                               ", '" + self.commentData.commentText +
+                               "', '" + self.commentData.title + "')")
         print(str(self.parentPostID) + "\n\n\n")
 
         self.db.conn.commit()
