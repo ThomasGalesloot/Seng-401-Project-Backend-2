@@ -4,6 +4,7 @@ from time import strftime
 from EventsDatabase import EventsDatabase
 from CommentData import CommentData
 
+
 class Event:
     eventID = ""
     CommentData = ""
@@ -29,25 +30,23 @@ class Event:
         self.commentTitle = cmtTitle
         self.author = auth
 
-
     def addEvent(self):
         print(
-            "Title: " + self.commentTitle + "\nContent: " + self.commentText + "\nAuthor: " + self.author + "\nPID: " + str(self.postID) + "\nTimestamp: " + self.dateString)
+            "Title: " + self.commentTitle + "\nContent: " + self.commentText + "\nAuthor: " + self.author + "\nPID: " + str(
+                self.postID) + "\nTimestamp: " + self.dateString)
 
         db = EventsDatabase()
         #  cd = CommentData("title", "commentText", "author", "votes", "parentPostID")
         # retrievedComments = []
         self.insertEvent()
 
-
     def insertEvent(self):
 
-        # self.cd = CommentData("title", "commentText", "testing", "votes", "parentPostID")
         self.db.cursor.execute("INSERT INTO [dbo].[Events] ("
                                "[postID]"
                                ",[userID]"
                                ",[cmtText]"
-                               ",[time]"
+                               ",[datePosted]"
                                ",[cmtTitle])"
                                "VALUES"
                                "( " + str(self.postID) +
