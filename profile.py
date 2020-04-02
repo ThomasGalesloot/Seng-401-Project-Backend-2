@@ -2,12 +2,12 @@ from flask import Flask, render_template, request, flash
 
 from Comment import Comment
 from CommentData import CommentData
+from Event import Event
 from Login import Login
 from Post import Post
 from PostData import PostData
 from PostDatabase import Database
 from flask import jsonify
-
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -41,6 +41,7 @@ def getvalue():
         flash('Invalid Credentials, please try again')
         return render_template("profile.html")
 
+
 @app.route('/comment', methods=['POST'])
 def comment():
     postid = request.get_json()
@@ -52,6 +53,7 @@ def comment():
     resp = jsonify(success=True)
     return resp
 
+
 @app.route('/commentPost', methods=['POST'])
 def postComment():
     title = request.form['title']
@@ -59,6 +61,14 @@ def postComment():
     author = x
     comment = Comment(title, content, author, 0, ID)  # TODO figure out how to find parentID
     comment.addComment()
+
+    # -------------------------------------
+    # anything in here is for eventdb, outside is old stuff, just so we can remove this for functionality
+
+    event = Event(ID, x, title, content)
+    event.addEvent()
+
+    # -------------------------------------
 
     # needed for when the page refreshes?
     pst = Post()
