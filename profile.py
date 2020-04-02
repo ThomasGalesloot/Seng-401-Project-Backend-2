@@ -114,6 +114,7 @@ def search():
     search = request.form['inSearch']
     print(search)
     ser = Search()
+    ser.retrievedPost.clear()
     ser.searchPostsByTitle(search)
     recipes = ser.retrievedPost
     print(len(recipes))
