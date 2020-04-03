@@ -1,7 +1,5 @@
-import ast
 from flask import Flask, render_template, request, flash
 
-from Comment import Comment
 from CommentData import CommentData
 from Event import Event
 from EventData import EventData
@@ -11,6 +9,8 @@ from PostData import PostData
 from PostDatabase import Database
 from flask import jsonify
 import requests
+from Search import Search
+
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -155,6 +155,29 @@ def viewPost():
     print(leng)
 
     return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
+
+
+@app.route('/mainPage', methods=['POST'])
+def mainPage():
+    pst = Post()
+    pst.retrieveBrowsingPosts()
+    recipes = pst.retrievedPosts
+    print(len(recipes))
+
+    return render_template("main-page.html", len=len(recipes), recipes=recipes)
+
+
+@app.route('/search', methods=['POST'])
+def search():
+    search = request.form['inSearch']
+    print(search)
+    ser = Search()
+    ser.retrievedPost.clear()
+    ser.searchPostsByTitle(search)
+    recipes = ser.retrievedPost
+    print(len(recipes))
+
+    return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
 
 if __name__ == "__main__":
