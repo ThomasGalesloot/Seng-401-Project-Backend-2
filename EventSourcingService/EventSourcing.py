@@ -45,6 +45,7 @@ def updatecmtdb():
     print("sucks")
     newID = eventcontroller.getnewid()
     eventcontroller.updateLastChecked(newID)
+    commentsToAdd.clear()
     return "sucess!"
 
 
