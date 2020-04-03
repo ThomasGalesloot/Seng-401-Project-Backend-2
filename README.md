@@ -14,7 +14,7 @@ Features Unable to Complete
 	- Cloud Deployment(*)
 
 (*) May be viable on local area network, we couldn't get the database hosted, 
-and due to security concerns, we didn't ___
+and due to security concerns, we didn't want to open our routers to provide the database to the cloud provider
 
 
 Who did what:
