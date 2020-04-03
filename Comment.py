@@ -5,16 +5,11 @@ import json
 
 class Comment:
     db = CommentsDatabase()
-    retrievedComments = []
+    retrievedComments = {}
     commentData = ""
-
-
-
-
 
     # inserts a brand new comment into the db
     def insertComment(self):
-
         # self.cd = CommentData("title", "commentText", "testing", "votes", "parentPostID")
         self.db.cursor.execute("INSERT INTO [dbo].[Comments] ("
                                "[postID]"
@@ -23,7 +18,8 @@ class Comment:
                                ",[cmtText]"
                                ",[cmtTitle])"
                                "VALUES"
-                               "( " + str(self.commentData.parentPostID) +  # TODO make this get the post ID from the event table
+                               "( " + str(
+            self.commentData.parentPostID) +  # TODO make this get the post ID from the event table
                                ", '" + self.commentData.author +
                                "', " + str(0) +
                                ", '" + self.commentData.commentText +
@@ -34,11 +30,11 @@ class Comment:
         self.searchComment(self.parentPostID)
 
     def searchComment(self, toSearch):
+        self.retrievedComments = {}
         self.db.cursor.execute(
             'select * from [dbo].[Comments] where postID =' + str(toSearch))
         for row in self.db.cursor.fetchall():
-            self.retrievedComments.append(
-                CommentData(row[5], row[0], row[1], row[2], row[3], row[4]))
-
-
+            temp = row[5]
+            temp2 = row[4]
+            self.retrievedComments[temp] = temp2
 

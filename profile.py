@@ -1,3 +1,4 @@
+import ast
 from flask import Flask, render_template, request, flash
 
 from Comment import Comment
@@ -123,35 +124,24 @@ def viewPost():
     pst.retrieveSinglePosts(ID)
     recipes = pst.retrievedPosts
     print(recipes[0].title)
-    # try:
-    print("Before request")
-
-    req = requests.get("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
-    # req.json()
-    print("After request")
-    # except request.exceptions.ConnectionError:
-    #    return "Service unavailable"
-    print(req.text)
-    res = req.text
-    length = res.split(" ", 2)
-    leng = int(length[1])
-    titles = res.split("((Title))", leng)
-    Comments = res.split("((Comment))", leng)
-    print(titles)
-    print(Comments)
-    t = []
     c = []
-    titles.pop(0)
-    for x in range(0, leng):
-        magic = titles[x].split(" ")
-        t.append(magic[1])
-        c.append(magic[3])
+    t = []
+    leng =0
+    try:
+        req = requests.get("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
+    except requests.exceptions.ConnectionError:
+        return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng =leng, c=c, t=t)
+    print(req.text)
+    thecomments = req.json()
+    leng = len(thecomments)
+    t = list(thecomments.keys())
+    c = list(thecomments.values())
 
-    print(t)
-    # c[leng-1].replace('"', '')
-    print(c)
+    print(c, type(c))
+    print(t, type(t))
+    print(leng)
 
-    return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
+    return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng =leng, c=c,t=t)
 
 
 if __name__ == "__main__":
