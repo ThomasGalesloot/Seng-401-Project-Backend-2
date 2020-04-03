@@ -1,15 +1,13 @@
 from flask import Flask, render_template, request, flash
 
-from CommentData import CommentData
-from Event import Event
-from EventData import EventData
-from Login import Login
-from Post import Post
-from PostData import PostData
-from PostDatabase import Database
+from MainApplication.Event import Event
+from MainApplication.EventData import EventData
+from MainApplication.Login import Login
+from MainApplication.Post import Post
+from MainApplication.PostData import PostData
 from flask import jsonify
 import requests
-from Search import Search
+from MainApplication.Search import Search
 
 
 app = Flask(__name__)
@@ -33,12 +31,10 @@ def getvalue():
     Test.compare()
     global x
     x = Username
-    print(Test.confirm_found)
     if Test.confirm_found == "true":
         pst = Post()
         pst.retrieveBrowsingPosts()
         recipes = pst.retrievedPosts
-        print(len(recipes))
 
         return render_template("main-page.html", len=len(recipes), recipes=recipes)
     else:
@@ -49,8 +45,6 @@ def getvalue():
 @app.route('/comment', methods=['POST'])
 def comment():
     postid = request.get_json()
-    print(postid)
-    print("\n\n\n\nHello\n\n\n\n")
     global ID
     ID = postid
     # return render_template("viewPost.html")
@@ -66,7 +60,6 @@ def postComment():
     pst = Post()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
-    print(len(recipes))
     event = EventData(ID, x, title, content)
     eventcontroller = Event()
     eventcontroller.addEvent(event)
@@ -75,7 +68,6 @@ def postComment():
         ping = requests.get("http://127.0.0.1:5001//fetchNew")
     except requests.exceptions.ConnectionError:
         return render_template("viewPost.html", len=len(recipes), recipes=recipes)
-    print(ping.text)
     c = []
     t = []
     leng = 0
@@ -83,15 +75,11 @@ def postComment():
         req = requests.get("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
     except requests.exceptions.ConnectionError:
         return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
-    print(req.text)
     thecomments = req.json()
     leng = len(thecomments)
     t = list(thecomments.keys())
     c = list(thecomments.values())
 
-    print(c, type(c))
-    print(t, type(t))
-    print(leng)
 
     return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
 
@@ -108,14 +96,12 @@ def postPost():
     time = request.form['time']
     owner = "me"
     post = PostData(name, x, type, des, steps, ing, time, 0)
-    print(" " + name + " " + x + " " + type + " " + des + " " + steps + " " + ing + " " + time)
 
     pst = Post()
     pst.pD = post
     pst.insertPost()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
-    print(len(recipes))
 
     return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
@@ -123,7 +109,6 @@ def postPost():
 @app.route('/view', methods=['POST'])
 def view():
     postid = request.get_json()
-    # print(postid)
     global ID
     ID = postid
     # return render_template("viewPost.html")
@@ -133,11 +118,9 @@ def view():
 
 @app.route('/viewPost', methods=['GET', 'POST'])
 def viewPost():
-    print(ID)
     pst = Post()
     pst.retrieveSinglePosts(ID)
     recipes = pst.retrievedPosts
-    print(recipes[0].title)
     c = []
     t = []
     leng = 0
@@ -145,15 +128,12 @@ def viewPost():
         req = requests.get("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
     except requests.exceptions.ConnectionError:
         return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
-    print(req.text)
     thecomments = req.json()
     leng = len(thecomments)
     t = list(thecomments.keys())
     c = list(thecomments.values())
 
-    print(c, type(c))
-    print(t, type(t))
-    print(leng)
+
 
     return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
 
@@ -163,7 +143,6 @@ def mainPage():
     pst = Post()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
-    print(len(recipes))
 
     return render_template("main-page.html", len=len(recipes), recipes=recipes)
 
@@ -171,12 +150,10 @@ def mainPage():
 @app.route('/search', methods=['POST'])
 def search():
     search = request.form['inSearch']
-    print(search)
     ser = Search()
     ser.retrievedPost.clear()
     ser.searchPostsByTitle(search)
     recipes = ser.retrievedPost
-    print(len(recipes))
 
     return render_template("main-page.html", len=len(recipes), recipes=recipes)
 

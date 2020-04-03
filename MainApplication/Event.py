@@ -1,9 +1,5 @@
-from datetime import datetime
-from time import strftime
-
-from EventData import EventData
-from EventsDatabase import EventsDatabase
-from CommentData import CommentData
+from MainApplication.EventData import EventData
+from MainApplication.EventsDatabase import EventsDatabase
 
 
 class Event:
@@ -18,8 +14,6 @@ class Event:
         self.eventData =EventData
 
         db = EventsDatabase()
-        #  cd = CommentData("title", "commentText", "author", "votes", "parentPostID")
-        # retrievedComments = []
         self.insertEvent()
 
     def insertEvent(self):
@@ -36,7 +30,6 @@ class Event:
                                "', '" + self.eventData.commentText +
                                "', '" + self.eventData.dateString +
                                "', '" + self.eventData.commentTitle + "')")
-        # print(str(self.parentPostID) + "\n\n\n")
 
         self.db.conn.commit()
 

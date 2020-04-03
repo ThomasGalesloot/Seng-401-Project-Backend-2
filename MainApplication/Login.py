@@ -1,9 +1,6 @@
-from flask import Flask, request, render_template
-
-from PostDatabase import Database
+from MainApplication.PostDatabase import Database
 
 
-# this is a simple test of the db feature
 class Login:
     username = ""
     password = ""
@@ -19,7 +16,6 @@ class Login:
                                           (self.username, self.password))
 
         rows = rowcount.fetchone()
-        print(rows)
         if rows is None:
             self.confirm_found = "false"
         else:

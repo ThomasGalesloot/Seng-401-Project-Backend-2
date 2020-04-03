@@ -1,5 +1,5 @@
-from PostDatabase import Database
-from PostData import PostData
+from MainApplication.PostDatabase import Database
+from MainApplication.PostData import PostData
 
 
 class Search:

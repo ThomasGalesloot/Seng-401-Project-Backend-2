@@ -1,6 +1,4 @@
-from CommentData import CommentData
-from CommentsDatabase import CommentsDatabase
-import json
+from CommentsMicroService.CommentsDatabase import CommentsDatabase
 
 
 class Comment:
@@ -24,7 +22,6 @@ class Comment:
                                "', " + str(0) +
                                ", '" + self.commentData.commentText +
                                "', '" + self.commentData.title + "')")
-        print(str(self.parentPostID) + "\n\n\n")
 
         self.db.conn.commit()
         self.searchComment(self.parentPostID)

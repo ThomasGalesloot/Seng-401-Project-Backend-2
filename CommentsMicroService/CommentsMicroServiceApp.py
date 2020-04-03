@@ -1,19 +1,10 @@
-import json
-from json.decoder import JSONArray
+from MainApplication.Event import Event
+from CommentsMicroService.CommentsDatabase import CommentsDatabase
 
-import jsonpickle
+from flask import Flask
 
-from EventSourcingService.EventDatabase import EDatabase
-from Event import Event
-from CommentsDatabase import CommentsDatabase
-from Comment import Comment
-
-from flask import Flask, render_template, request, flash
-
-from Comment import Comment
+from CommentsMicroService.Comment import Comment
 from flask import jsonify
-from flask import Response
-
 
 app = Flask(__name__)
 # app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -28,7 +19,6 @@ def updatecmtdb():
     commentsToAdd = eventcontroller.getnewevents(lastID)
     cdb = CommentsDatabase()
     for i in commentsToAdd:
-        print("fck")
         cdb.cursor.execute("INSERT INTO CommentsDatabase.dbo.Comments ("
                                "[postID]"
                                ",[userID]"
@@ -42,7 +32,6 @@ def updatecmtdb():
                                ", '" + i.commentText +
                                "', '" + i.commentTitle + "')")
         cdb.conn.commit()
-    print("sucks")
     newID = eventcontroller.getnewid()
     eventcontroller.updateLastChecked(newID)
     commentsToAdd.clear()
