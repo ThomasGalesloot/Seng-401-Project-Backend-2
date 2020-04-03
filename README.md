@@ -1,5 +1,8 @@
 Bread.it Readme
 
+GitHub Repository:
+https://github.com/ThomasGalesloot/Seng-401-Project-Backend-2.git
+
 How to run:
 
 	1. Download database backup files and source files.	
