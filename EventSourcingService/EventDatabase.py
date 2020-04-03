@@ -1,11 +1,11 @@
 import pyodbc
 
 
-class Database:
+class EDatabase:
 
     def __init__(self):
         self.conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=LAPTOP-7OES2EOP;'
-                                   'Database=Project;'
+                                   'Server=LAPTOP-2LU2E79L;'
+                                   'Database=EventsDatabase;'
                                    'Trusted_Connection=yes;')
         self.cursor = self.conn.cursor()

@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 
-from Database import Database
+from PostDatabase import Database
 
 
 # this is a simple test of the db feature

@@ -71,28 +71,17 @@
 
     <div class="card">
         <h2>Comments:</h2>
+
+        {%for i in range(0, leng)%}
     <div class="card">
-        <h4>*Comment Title*</h4>
-        <p>*Comment content*
-            *keep looping*
-        </p>
+        <h4>{{t[i]}}</h4>
+        <p>{{c[i]}}</p>
     </div>
-    <div class="card">
-        <h4>*Comment Title*</h4>
-        <p>*Comment content*
-            *keep looping*
-        </p>
-    </div>
-    <div class="card">
-        <h4>*Comment Title*</h4>
-        <p>*Comment content*
-            *keep looping*
-        </p>
-    </div>
+    {%endfor%}
     </div>
 
     <div class="card">
-    <form action = "/comment" method = "post" target="_blank" name="comment">
+    <form action = "/commentPost" method = "post" target="_blank" name="comment">
         <div id="newCommentPopup">
             <div class="comment-Popup" id="commentForm">
             <h2>Share your thoughts:</h2>
