@@ -5,7 +5,7 @@ class EDatabase:
 
     def __init__(self):
         self.conn = pyodbc.connect('Driver={SQL Server};'
-                                   'Server=LAPTOP-2LU2E79L;'
+                                   'Server=DESKTOP-Q5ABK7U;'
                                    'Database=EventsDatabase;'
                                    'Trusted_Connection=yes;')
         self.cursor = self.conn.cursor()

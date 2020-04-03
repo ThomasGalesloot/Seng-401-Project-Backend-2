@@ -1,5 +1,8 @@
 from MainApplication.Event import Event
 from CommentsMicroService.CommentsDatabase import CommentsDatabase
+import json
+from json.decoder import JSONArray
+
 
 from flask import Flask
 
