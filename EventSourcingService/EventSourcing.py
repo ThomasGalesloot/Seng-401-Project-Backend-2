@@ -19,29 +19,33 @@ app = Flask(__name__)
 # app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SECRET_KEY'] = 'df^(*($#jfdkglI'
 
-lastChecked = -1
-ID = 1
 
 
 @app.route("/fetchNew")
-def updatecmtdb(self):
-    commentsToAdd = Event.getnewevents(Event(0, 0), lastChecked)
+def updatecmtdb():
+    eventcontroller = Event()
+    lastID = eventcontroller.getLastChecked()
+    commentsToAdd = eventcontroller.getnewevents(lastID)
     cdb = CommentsDatabase()
     for i in commentsToAdd:
-        cdb.cursor.execute("INSERT INTO [dbo].[Comments] ("
+        print("fck")
+        cdb.cursor.execute("INSERT INTO CommentsDatabase.dbo.Comments ("
                                "[postID]"
                                ",[userID]"
                                ",[votes]"
                                ",[cmtText]"
                                ",[cmtTitle])"
                                "VALUES"
-                               "( " + str(i.parentPostID) +
+                               "( " + str(i.postID) +
                                ", '" + i.author +
                                "', " + str(0) +
                                ", '" + i.commentText +
-                               "', '" + i.title + "')")
-    self.lastChecked = Event.getnewid(Event(0, 0))
-    return jsonify(success=True)
+                               "', '" + i.commentTitle + "')")
+        cdb.conn.commit()
+    print("sucks")
+    newID = eventcontroller.getnewid()
+    eventcontroller.updateLastChecked(newID)
+    return "sucess!"
 
 
 @app.route('/fetchCmts/<postid>')

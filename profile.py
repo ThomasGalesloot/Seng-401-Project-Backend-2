@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, flash
 from Comment import Comment
 from CommentData import CommentData
 from Event import Event
+from EventData import EventData
 from Login import Login
 from Post import Post
 from PostData import PostData
@@ -61,27 +62,39 @@ def postComment():
     title = request.form['title']
     content = request.form['content']
     author = x
-
-    comment = Comment()
-    commentData = CommentData(title, content, author, 0, ID)
-    comment.commentData = commentData
-    comment.insertComment()  # TODO Maybe remove
-
-    # -------------------------------------
-    # anything in here is for eventdb, outside is old stuff, just so we can remove this for functionality
-
-    event = Event(ID, x, title, content)
-    event.addEvent()
-
-    # -------------------------------------
-
-    # needed for when the page refreshes?
     pst = Post()
     pst.retrieveBrowsingPosts()
     recipes = pst.retrievedPosts
     print(len(recipes))
+    event = EventData(ID, x, title, content)
+    eventcontroller = Event()
+    eventcontroller.addEvent(event)
 
-    return render_template("viewPost.html", len=len(recipes), recipes=recipes)
+    try:
+        ping = requests.get("http://127.0.0.1:5001//fetchNew")
+    except requests.exceptions.ConnectionError:
+        return render_template("viewPost.html", len=len(recipes), recipes=recipes)
+    print(ping.text)
+    c = []
+    t = []
+    leng = 0
+    try:
+        req = requests.get("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
+    except requests.exceptions.ConnectionError:
+        return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
+    print(req.text)
+    thecomments = req.json()
+    leng = len(thecomments)
+    t = list(thecomments.keys())
+    c = list(thecomments.values())
+
+    print(c, type(c))
+    print(t, type(t))
+    print(leng)
+
+    return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
+
+
 
 
 @app.route('/post', methods=['POST'])
@@ -126,11 +139,11 @@ def viewPost():
     print(recipes[0].title)
     c = []
     t = []
-    leng =0
+    leng = 0
     try:
         req = requests.get("http://127.0.0.1:5001/fetchCmts/{}".format(ID))
     except requests.exceptions.ConnectionError:
-        return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng =leng, c=c, t=t)
+        return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
     print(req.text)
     thecomments = req.json()
     leng = len(thecomments)
@@ -141,7 +154,7 @@ def viewPost():
     print(t, type(t))
     print(leng)
 
-    return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng =leng, c=c,t=t)
+    return render_template("viewPost.html", len=len(recipes), recipes=recipes, leng=leng, c=c, t=t)
 
 
 if __name__ == "__main__":
